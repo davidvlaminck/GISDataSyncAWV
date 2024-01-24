@@ -1,0 +1,34 @@
+{
+    "@type": "https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#HeeftBetrokkene",
+    "@id": "https://data.awvvlaanderen.be/id/assetrelatie/71bf1efa-160d-4f94-bd3c-c65ad2ea3530-b25kZXJkZWVsI0hlZWZ0QmV0cm9ra2VuZQ",
+    "RelatieObject.bron":
+    {
+        "@type": "https://wegenenverkeer.data.vlaanderen.be/ns/installatie#GeluidwerendeConstructie",
+        "@id": "https://data.awvvlaanderen.be/id/asset/e1a42f68-f510-46f5-b587-854fa0c493df-aW5zdGFsbGF0aWUjR2VsdWlkd2VyZW5kZUNvbnN0cnVjdGll"
+    },
+    "RelatieObject.doel":
+    {
+        "@type": "http://purl.org/dc/terms/Agent",
+        "@id": "https://data.awvvlaanderen.be/id/asset/e3453d77-45f6-4821-9087-c944cb232e54-cHVybDpBZ2VudA"
+    },
+    "HeeftBetrokkene.specifiekeContactinfo":
+    [],
+    "RelatieObject.doelAssetId":
+    {
+        "DtcIdentificator.identificator": "e3453d77-45f6-4821-9087-c944cb232e54-cHVybDpBZ2VudA",
+        "DtcIdentificator.toegekendDoor": "AWV"
+    },
+    "RelatieObject.bronAssetId":
+    {
+        "DtcIdentificator.identificator": "e1a42f68-f510-46f5-b587-854fa0c493df-aW5zdGFsbGF0aWUjR2VsdWlkd2VyZW5kZUNvbnN0cnVjdGll",
+        "DtcIdentificator.toegekendDoor": "AWV"
+    },
+    "AIMDBStatus.isActief": true,
+    "HeeftBetrokkene.rol": "https://wegenenverkeer.data.vlaanderen.be/id/concept/KlBetrokkenheidRol/beheerder",
+    "RelatieObject.typeURI": "https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#HeeftBetrokkene",
+    "RelatieObject.assetId":
+    {
+        "DtcIdentificator.identificator": "71bf1efa-160d-4f94-bd3c-c65ad2ea3530-b25kZXJkZWVsI0hlZWZ0QmV0cm9ra2VuZQ",
+        "DtcIdentificator.toegekendDoor": "AWV"
+    }
+}

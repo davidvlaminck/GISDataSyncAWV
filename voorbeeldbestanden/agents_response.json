@@ -1,0 +1,13 @@
+{
+    "@type": "http://purl.org/dc/terms/Agent",
+    "@id": "https://data.awvvlaanderen.be/id/asset/e3453d77-45f6-4821-9087-c944cb232e54-cHVybDpBZ2VudA",
+    "purl:Agent.contactinfo": [],
+    "purl:Agent.naam": "District Antwerpen",
+    "tz:Agent.ovoCode": "OVO039716",
+    "tz:Agent.voId": "",
+    "purl:Agent.agentId":
+    {
+        "DtcIdentificator.identificator": "e3453d77-45f6-4821-9087-c944cb232e54-cHVybDpBZ2VudA",
+        "DtcIdentificator.toegekendDoor": "AWV"
+    }
+}

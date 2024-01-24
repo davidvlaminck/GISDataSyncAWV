@@ -1,0 +1,129 @@
+{
+    "type": "FeatureCollection",
+    "features":
+    [
+        {
+            "id": "71bf1efa-160d-4f94-bd3c-c65ad2ea3530-b25kZXJkZWVsI0hlZWZ0QmV0cm9ra2VuZQ",
+            "properties":
+            {
+                "assetId.toegekendDoor": "AWV",
+                "doelAssetId.identificator": "e3453d77-45f6-4821-9087-c944cb232e54-cHVybDpBZ2VudA",
+                "assetId.identificator": "71bf1efa-160d-4f94-bd3c-c65ad2ea3530-b25kZXJkZWVsI0hlZWZ0QmV0cm9ra2VuZQ",
+                "bronAssetId.identificator": "e1a42f68-f510-46f5-b587-854fa0c493df-aW5zdGFsbGF0aWUjR2VsdWlkd2VyZW5kZUNvbnN0cnVjdGll",
+                "bronAssetId.toegekendDoor": "AWV",
+                "typeURI": "https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#HeeftBetrokkene",
+                "rol": "beheerder",
+                "isActief": "true",
+                "doelAssetId.toegekendDoor": "AWV",
+                "bron.typeURI": "https://wegenenverkeer.data.vlaanderen.be/ns/installatie#GeluidwerendeConstructie",
+                "doel.typeURI": "http://purl.org/dc/terms/Agent"
+            },
+            "type": "Feature"
+        },
+        {
+            "id": "e1a42f68-f510-46f5-b587-854fa0c493df-aW5zdGFsbGF0aWUjR2VsdWlkd2VyZW5kZUNvbnN0cnVjdGll",
+            "properties":
+            {
+                "assetId.toegekendDoor": "AWV",
+                "assetId.identificator": "e1a42f68-f510-46f5-b587-854fa0c493df-aW5zdGFsbGF0aWUjR2VsdWlkd2VyZW5kZUNvbnN0cnVjdGll",
+                "notitie": "",
+                "totaleLengte": "1230.0",
+                "typeURI": "https://wegenenverkeer.data.vlaanderen.be/ns/installatie#GeluidwerendeConstructie",
+                "naam": "1_115",
+                "isActief": "true",
+                "toestand": "in-gebruik",
+                "datumOprichtingObject": "1980-01-01"
+            },
+            "type": "Feature",
+            "geometry":
+            {
+                "type": "LineString",
+                "coordinates":
+                [
+                    [
+                        151142.866,
+                        205872.847,
+                        28.262
+                    ],
+                    [
+                        151159.61,
+                        205969.995,
+                        28.494
+                    ],
+                    [
+                        151176.527,
+                        206068.276,
+                        28.447
+                    ],
+                    [
+                        151192.987,
+                        206164.395,
+                        28.178
+                    ],
+                    [
+                        151210.628,
+                        206266.457,
+                        27.74
+                    ],
+                    [
+                        151227.349,
+                        206363.436,
+                        27.308
+                    ],
+                    [
+                        151243.808,
+                        206459.095,
+                        26.822
+                    ],
+                    [
+                        151262.358,
+                        206566.456,
+                        26.37
+                    ],
+                    [
+                        151279.241,
+                        206664.832,
+                        25.983
+                    ],
+                    [
+                        151296.204,
+                        206763.054,
+                        25.524
+                    ],
+                    [
+                        151312.979,
+                        206860.422,
+                        25.076
+                    ],
+                    [
+                        151329.569,
+                        206956.73,
+                        24.559
+                    ],
+                    [
+                        151351.487,
+                        207084.991,
+                        22.69
+                    ]
+                ],
+                "bbox":
+                [
+                    151142.866,
+                    205872.847,
+                    22.69,
+                    151351.487,
+                    207084.991,
+                    28.494
+                ],
+                "crs":
+                {
+                    "properties":
+                    {
+                        "name": "EPSG:31370"
+                    },
+                    "type": "name"
+                }
+            }
+        }
+    ]
+}

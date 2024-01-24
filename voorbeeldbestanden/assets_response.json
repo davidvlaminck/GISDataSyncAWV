@@ -1,0 +1,119 @@
+{
+    "@type": "https://wegenenverkeer.data.vlaanderen.be/ns/installatie#GeluidwerendeConstructie",
+    "@id": "https://data.awvvlaanderen.be/id/asset/e1a42f68-f510-46f5-b587-854fa0c493df-aW5zdGFsbGF0aWUjR2VsdWlkd2VyZW5kZUNvbnN0cnVjdGll",
+    "GeluidwerendeConstructie.totaleLengte": 1230,
+    "wl:Weglocatie.bron": "https://wl.data.wegenenverkeer.be/id/concept/KlWeglocatieBron/automatisch",
+    "wl:Weglocatie.geometrie": "MULTILINESTRING Z((151135.506 205874.119 0, 151163.784 206037.791 0, 151190.129 206191.787 0, 151222.077 206376.386 0, 151243.726 206503.934 0, 151271.035 206661.252 0, 151303.086 206848.185 0, 151342.438 207075.925 0, 151344.245 207086.258 0))",
+    "AIMObject.datumOprichtingObject": "1980-01-01",
+    "loc:Locatie.geometrie": "LINESTRING Z (151142.866 205872.847 28.262,151159.61 205969.995 28.494,151176.527 206068.276 28.447,151192.987 206164.395 28.178,151210.628 206266.457 27.74,151227.349 206363.436 27.308,151243.808 206459.095 26.822,151262.358 206566.456 26.37,151279.241 206664.832 25.983,151296.204 206763.054 25.524,151312.979 206860.422 25.076,151329.569 206956.73 24.559,151351.487 207084.991 22.69)",
+    "AIMToestand.toestand": "https://wegenenverkeer.data.vlaanderen.be/id/concept/KlAIMToestand/in-gebruik",
+    "wl:Weglocatie.wegaanduiding":
+    [
+        {
+            "wl:DtcWegaanduiding.weg":
+            {
+                "wl:DtcWeg.nummer": "A0120001"
+            },
+            "wl:DtcWegaanduiding.tot":
+            {
+                "wl:DtcRelatieveLocatie.referentiepunt":
+                {
+                    "wl:DtcReferentiepunt.weg":
+                    {
+                        "wl:DtcWeg.nummer": "A0120001"
+                    },
+                    "wl:DtcReferentiepunt.opschrift": "32.9"
+                },
+                "wl:DtcRelatieveLocatie.weg":
+                {
+                    "wl:DtcWeg.nummer": "A0120001"
+                },
+                "wl:DtcRelatieveLocatie.afstand": 27
+            },
+            "wl:DtcWegaanduiding.van":
+            {
+                "wl:DtcRelatieveLocatie.afstand": 1,
+                "wl:DtcRelatieveLocatie.referentiepunt":
+                {
+                    "wl:DtcReferentiepunt.weg":
+                    {
+                        "wl:DtcWeg.nummer": "A0120001"
+                    },
+                    "wl:DtcReferentiepunt.opschrift": "31.7"
+                },
+                "wl:DtcRelatieveLocatie.weg":
+                {
+                    "wl:DtcWeg.nummer": "A0120001"
+                }
+            }
+        }
+    ],
+    "loc:Locatie.puntlocatie":
+    {
+        "loc:DtcPuntlocatie.bron": "https://loc.data.wegenenverkeer.be/id/concept/KlLocatieBron/meettoestel",
+        "loc:DtcPuntlocatie.weglocatie":
+        {
+            "loc:DtcWeglocatie.straatnaam": "Boomsesteenweg",
+            "loc:DtcWeglocatie.ident8": "A0120001",
+            "loc:DtcWeglocatie.referentiepaalAfstand": 1,
+            "loc:DtcWeglocatie.gemeente": "Antwerpen",
+            "loc:DtcWeglocatie.ident2": "A12",
+            "loc:DtcWeglocatie.referentiepaalOpschrift": 31.7
+        },
+        "loc:3Dpunt.puntgeometrie":
+        {
+            "loc:DtcCoord.lambert72":
+            {
+                "loc:DtcCoordLambert72.ycoordinaat": 205872.8,
+                "loc:DtcCoordLambert72.xcoordinaat": 151142.9,
+                "loc:DtcCoordLambert72.zcoordinaat": 28.3
+            }
+        },
+        "loc:DtcPuntlocatie.adres":
+        {
+            "loc:DtcAdres.bus": "",
+            "loc:DtcAdres.gemeente": "Antwerpen",
+            "loc:DtcAdres.postcode": "2610",
+            "loc:DtcAdres.provincie": "Antwerpen",
+            "loc:DtcAdres.straat": "Boomsesteenweg (WI)",
+            "loc:DtcAdres.nummer": "467"
+        },
+        "loc:DtcPuntlocatie.precisie": "https://loc.data.wegenenverkeer.be/id/concept/KlLocatiePrecisie/meter"
+    },
+    "wl:Weglocatie.wegsegment":
+    [
+        {
+            "wl:DtcWegsegment.oidn": 421363
+        }
+    ],
+    "AIMObject.typeURI": "https://wegenenverkeer.data.vlaanderen.be/ns/installatie#GeluidwerendeConstructie",
+    "AIMObject.assetId":
+    {
+        "DtcIdentificator.identificator": "e1a42f68-f510-46f5-b587-854fa0c493df-aW5zdGFsbGF0aWUjR2VsdWlkd2VyZW5kZUNvbnN0cnVjdGll",
+        "DtcIdentificator.toegekendDoor": "AWV"
+    },
+    "loc:Locatie.omschrijving": "",
+    "AIMDBStatus.isActief": true,
+    "AIMNaamObject.naam": "1_115",
+    "wl:Weglocatie.score": "0.21332775023927125",
+    "AIMObject.notitie": "",
+    "geo:Geometrie.log":
+    [
+        {
+            "geo:DtcLog.geometrie":
+            {
+                "geo:DtuGeometrie.lijn": "LINESTRING Z (151142.866 205872.847 28.262,151159.61 205969.995 28.494,151176.527 206068.276 28.447,151192.987 206164.395 28.178,151210.628 206266.457 27.74,151227.349 206363.436 27.308,151243.808 206459.095 26.822,151262.358 206566.456 26.37,151279.241 206664.832 25.983,151296.204 206763.054 25.524,151312.979 206860.422 25.076,151329.569 206956.73 24.559,151351.487 207084.991 22.69)"
+            },
+            "geo:DtcLog.bron": "https://geo.data.wegenenverkeer.be/id/concept/KlLogBron/meettoestel",
+            "geo:DtcLog.nauwkeurigheid": "https://geo.data.wegenenverkeer.be/id/concept/KlLogNauwkeurigheid/20",
+            "geo:DtcLog.niveau": "https://geo.data.wegenenverkeer.be/id/concept/KlLogNiveau/0",
+            "geo:DtcLog.gaVersie": "",
+            "geo:DtcLog.afmeting":
+            {
+                "geo:DtuAfmeting.lengte": 1229.97
+            },
+            "geo:DtcLog.overerving":
+            []
+        }
+    ]
+}
