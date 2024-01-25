@@ -1,0 +1,20 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "id": "e1a42f68-f510-46f5-b587-854fa0c493df-aW5zdGFsbGF0aWUjR2VsdWlkd2VyZW5kZUNvbnN0cnVjdGll",
+            "properties": {
+                "typeURI": "https://wegenenverkeer.data.vlaanderen.be/ns/installatie#GeluidwerendeConstructie",
+                "assetId.identificator": "e1a42f68-f510-46f5-b587-854fa0c493df-aW5zdGFsbGF0aWUjR2VsdWlkd2VyZW5kZUNvbnN0cnVjdGll",
+                "assetId.toegekendDoor": "AWV",
+                "datumOprichtingObject": "1980-01-01",
+                "isActief": "true",
+                "naam": "1_115",
+                "notitie": "",
+                "toestand": "in-gebruik",
+                "totaleLengte": "1230.0"
+            },
+            "type": "Feature"
+        }
+    ]
+}
