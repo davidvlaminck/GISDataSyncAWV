@@ -36,10 +36,8 @@ class GisDataSyncerOtlmow:
         converter = OtlmowConverter()
         converter.create_file_from_assets(filepath=file_path, list_of_objects=[asset])
 
-
-        print(clean_dict)
-
-    def clean_dict(self, dict_to_clean: dict) -> dict:
+    @classmethod
+    def clean_dict(cls, dict_to_clean: dict) -> dict:
         new_d = {}
         for k, v in dict_to_clean.items():
             if k in {'@context', '@id', '@type'}:
@@ -49,12 +47,12 @@ class GisDataSyncerOtlmow:
             if '.' in k:
                 k = k.split('.', 1)[-1]
             if isinstance(v, dict):
-                v = self.clean_dict(v)
+                v = cls.clean_dict(v)
             if isinstance(v, list):
                 new_v = []
                 for item in v:
                     if isinstance(item, dict):
-                        new_v.append(self.clean_dict(item))
+                        new_v.append(cls.clean_dict(item))
                     else:
                         new_v.append(item)
                 v = new_v
