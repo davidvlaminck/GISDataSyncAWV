@@ -12,43 +12,44 @@ from random import choice
 
 from requests import Response
 
+from voobeeldcode.EMInfraAPI.AbstractRequester import AbstractRequester
 
-class JWTRequester(requests.Session):
+
+class JWTRequester(AbstractRequester):
     def __init__(self, private_key_path: Path, client_id: str, first_part_url: str = ''):
         if 'cryptography' not in sys.modules:
             raise ModuleNotFoundError('needs module cryptography to work')
 
+        super().__init__(first_part_url=first_part_url)
         self.private_key_path: Path = private_key_path
         self.client_id: str = client_id
-        self.first_part_url: str = first_part_url
 
         self.oauth_token: str = ''
-        self.expires: datetime.datetime = datetime.datetime.utcnow() - datetime.timedelta(seconds=1)
+        self.expires: datetime.datetime = datetime.datetime.now(datetime.UTC) - datetime.timedelta(seconds=1)
         self.requested_at: datetime.datetime = self.expires
-        super().__init__()
 
-    def get(self, url='', **kwargs) -> Response:
+    def get(self, url: str = '', **kwargs) -> Response:
         kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().get(url=self.first_part_url + url, **kwargs)
+        return super().get(url=url, **kwargs)
 
-    def post(self, url='', **kwargs) -> Response:
+    def post(self, url: str = '', **kwargs) -> Response:
         kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().post(url=self.first_part_url + url, **kwargs)
+        return super().post(url=url, **kwargs)
 
-    def put(self, url='', **kwargs) -> Response:
+    def put(self, url: str = '', **kwargs) -> Response:
         kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().put(url=self.first_part_url + url, **kwargs)
+        return super().put(url=url, **kwargs)
 
-    def patch(self, url='', **kwargs) -> Response:
+    def patch(self, url: str = '', **kwargs) -> Response:
         kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().patch(url=self.first_part_url + url, **kwargs)
+        return super().patch(url=url, **kwargs)
 
-    def delete(self, url='', **kwargs) -> Response:
+    def delete(self, url: str = '', **kwargs) -> Response:
         kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().delete(url=self.first_part_url + url, **kwargs)
+        return super().delete(url=url, **kwargs)
 
     def get_oauth_token(self) -> str:
-        if self.expires > datetime.datetime.utcnow():
+        if self.expires > datetime.datetime.now(datetime.UTC):
             return self.oauth_token
 
         authentication_token = self.generate_authentication_token()
@@ -62,25 +63,26 @@ class JWTRequester(requests.Session):
         if 'headers' not in kwargs:
             kwargs['headers'] = {}
 
-        for arg in kwargs:
-            if arg == 'headers':
-                headers = kwargs[arg]
-                if 'accept' not in headers:
-                    headers['accept'] = ''
-                if headers['accept'] is not None:
-                    if headers['accept'] != '':
-                        headers['accept'] = f"{headers['accept']}, application/json"
-                    else:
-                        headers['accept'] = 'application/json'
-                headers['authorization'] = f'Bearer {bearer_token}'
-                if 'Content-Type' not in headers or headers['Content-Type'] is None:
-                    headers['Content-Type'] = 'application/vnd.awv.eminfra.v1+json'
-                kwargs['headers'] = headers
+        if kwargs.get('headers') is None:
+            return kwargs
+
+        headers = kwargs['headers']
+        if 'accept' not in headers:
+            headers['accept'] = ''
+        if headers['accept'] is not None:
+            if headers['accept'] != '':
+                headers['accept'] = f"{headers['accept']}, application/json"
+            else:
+                headers['accept'] = 'application/json'
+        headers['authorization'] = f'Bearer {bearer_token}'
+        if 'Content-Type' not in headers or headers['Content-Type'] is None:
+            headers['Content-Type'] = 'application/vnd.awv.eminfra.v1+json'
+        kwargs['headers'] = headers
 
         return kwargs
 
     def generate_authentication_token(self) -> str:
-        self.requested_at = datetime.datetime.utcnow()
+        self.requested_at = datetime.datetime.now(datetime.UTC)
         # Authentication token generation
         payload = {'iss': self.client_id,
                    'sub': self.client_id,
@@ -127,4 +129,3 @@ class SingletonJWTRequester(JWTRequester):
         if cls.instance is None:
             cls.instance = super(SingletonJWTRequester, cls).__new__(cls)
         return cls.instance
-

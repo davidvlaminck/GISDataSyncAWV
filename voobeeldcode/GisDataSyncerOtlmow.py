@@ -3,30 +3,29 @@ from pathlib import Path
 
 from otlmow_converter.OtlmowConverter import OtlmowConverter
 from otlmow_model.OtlmowModel.BaseClasses.OTLObject import OTLObject
-from requests import Session
 
+from voobeeldcode.EMInfraAPI.AbstractRequester import AbstractRequester
 from voobeeldcode.EMInfraAPI.EMInfraImporter import EMInfraImporter
-from voobeeldcode.EMInfraAPI.RequestHandler import RequestHandler
 from voobeeldcode.EMInfraAPI.RequesterFactory import RequesterFactory
 from voobeeldcode.Enums import AuthType, Environment
 
 
 class GisDataSyncerOtlmow:
     def __init__(self, settings_path: Path, auth_type: AuthType, env: Environment):
-        self.requests_handler = self.create_requests_handler_with_settings(
+        self.requester = self.create_requester_with_settings(
             settings_path=settings_path, auth_type=auth_type, env=env)
-        self.em_infra_importer = EMInfraImporter(request_handler=RequestHandler(self.requests_handler))
+        self.em_infra_importer = EMInfraImporter(requester=self.requester)
 
     @classmethod
-    def create_requests_handler_with_settings(cls, settings_path: Path, auth_type: AuthType, env: Environment
-                                             ) -> Session:
+    def create_requester_with_settings(cls, settings_path: Path, auth_type: AuthType, env: Environment
+                                             ) -> AbstractRequester:
         with open(settings_path) as settings_file:
             settings = json.load(settings_file)
         return RequesterFactory.create_requester(settings=settings, auth_type=auth_type, env=env)
 
     def transform_api_result_to_geojson(self, file_path: Path) -> None:
 
-        api_response = self.em_infra_importer.get_objects_from_oslo_search_endpoint_with_iterator(
+        api_response = self.em_infra_importer.get_objects_from_oslo_search_endpoint_using_iterator(
             resource='assets', filter_dict={"uuid": ['e1a42f68-f510-46f5-b587-854fa0c493df']})
 
         clean_dict = self.clean_dict(next(api_response)[0])

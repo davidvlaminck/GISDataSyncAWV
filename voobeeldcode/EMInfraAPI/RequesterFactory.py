@@ -1,5 +1,4 @@
-import requests
-
+from voobeeldcode.EMInfraAPI.AbstractRequester import AbstractRequester
 from voobeeldcode.EMInfraAPI.CertRequester import CertRequester
 from voobeeldcode.EMInfraAPI.JWTRequester import JWTRequester
 from voobeeldcode.Enums import Environment, AuthType
@@ -14,7 +13,7 @@ class RequesterFactory:
     }
     
     @classmethod
-    def create_requester(cls, settings: dict, auth_type: AuthType, env: Environment) -> requests.Session:
+    def create_requester(cls, settings: dict, auth_type: AuthType, env: Environment) -> AbstractRequester:
         try:
             specific_settings = settings['authentication'][auth_type.name][env.name.lower()]
         except KeyError as e:
