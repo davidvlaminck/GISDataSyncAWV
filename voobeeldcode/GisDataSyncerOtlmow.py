@@ -28,7 +28,8 @@ class GisDataSyncerOtlmow:
         api_response = self.em_infra_importer.get_objects_from_oslo_search_endpoint_using_iterator(
             resource='assets', filter_dict={"uuid": ['e1a42f68-f510-46f5-b587-854fa0c493df']})
 
-        clean_dict = self.clean_dict(next(api_response)[0])
+        response_list = next(api_response)
+        clean_dict = self.clean_dict(response_list[0])
 
         asset = OTLObject.from_dict(clean_dict)
 
