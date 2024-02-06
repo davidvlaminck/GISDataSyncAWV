@@ -16,9 +16,7 @@ class GisDataSyncer:
 
     @classmethod
     def create_requester_with_settings(cls, settings_path: Path, auth_type: AuthType, env: Environment
-                                             ) -> Session:
+                                       ) -> Session:
         with open(settings_path) as settings_file:
             settings = json.load(settings_file)
         return RequesterFactory.create_requester(settings=settings, auth_type=auth_type, env=env)
-
-

@@ -18,7 +18,7 @@ class GisDataSyncerOtlmow:
 
     @classmethod
     def create_requester_with_settings(cls, settings_path: Path, auth_type: AuthType, env: Environment
-                                             ) -> AbstractRequester:
+                                       ) -> AbstractRequester:
         with open(settings_path) as settings_file:
             settings = json.load(settings_file)
         return RequesterFactory.create_requester(settings=settings, auth_type=auth_type, env=env)
@@ -31,7 +31,7 @@ class GisDataSyncerOtlmow:
         response_list = next(api_response)
         clean_dict = self.clean_dict(response_list[0])
 
-        asset = OTLObject.from_dict(clean_dict)
+        asset = OTLObject.from_dict(clean_dict, datetime_as_string=True)
 
         converter = OtlmowConverter()
         converter.create_file_from_assets(filepath=file_path, list_of_objects=[asset])
@@ -58,6 +58,3 @@ class GisDataSyncerOtlmow:
                 v = new_v
             new_d[k] = v
         return new_d
-
-
-
