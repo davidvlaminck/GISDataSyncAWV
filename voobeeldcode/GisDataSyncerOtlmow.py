@@ -26,15 +26,18 @@ class GisDataSyncerOtlmow:
     def transform_api_result_to_geojson(self, file_path: Path) -> None:
 
         api_response = self.em_infra_importer.get_objects_from_oslo_search_endpoint_using_iterator(
-            resource='assets', filter_dict={"uuid": ['e1a42f68-f510-46f5-b587-854fa0c493df']})
+            resource='assets', filter_dict=
+            {"typeUri": ['https://wegenenverkeer.data.vlaanderen.be/ns/installatie#GeluidwerendeConstructie']})
 
-        response_list = next(api_response)
-        clean_dict = self.clean_dict(response_list[0])
-
-        asset = OTLObject.from_dict(clean_dict, datetime_as_string=True)
+        assets = []
+        for response_list in api_response:
+            for response in response_list:
+                clean_dict = self.clean_dict(response)
+                asset = OTLObject.from_dict(clean_dict, datetime_as_string=True)
+                assets.append(asset)
 
         converter = OtlmowConverter()
-        converter.create_file_from_assets(filepath=file_path, list_of_objects=[asset])
+        converter.create_file_from_assets(filepath=file_path, list_of_objects=assets)
 
     @classmethod
     def clean_dict(cls, dict_to_clean: dict) -> dict:
@@ -42,6 +45,8 @@ class GisDataSyncerOtlmow:
         for k, v in dict_to_clean.items():
             if k in {'@context', '@id', '@type'}:
                 continue
+            if k == 'loc:Locatie.geometrie':
+                new_d['geometry'] = v
             if ':' in k:
                 continue
             if '.' in k:

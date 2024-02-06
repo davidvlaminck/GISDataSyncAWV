@@ -7,5 +7,6 @@ settings_path = Path('/home/davidlinux/Documents/AWV/resources/settings_GISDataS
 
 if __name__ == '__main__':
     syncer = GisDataSyncerOtlmow(settings_path=settings_path, auth_type=AuthType.JWT, env=Environment.PRD)
+
     syncer.transform_api_result_to_geojson(file_path=Path('example.geojson'))
 

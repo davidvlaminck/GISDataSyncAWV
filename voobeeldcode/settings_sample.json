@@ -20,22 +20,22 @@
         },
         "cert": {
             "prd": {
-                "cert_path" : "path_to_crt_prd_private.json",
-                "key_path" : "path_to_key_prd_private.json"
+                "cert_path" : "path_to_crt_prd_private.crt",
+                "key_path" : "path_to_key_prd_private.key"
             },
             "tei": {
-                "cert_path" : "path_to_crt_tei_private.json",
-                "key_path" : "path_to_key_tei_private.json"
+                "cert_path" : "path_to_crt_tei_private.crt",
+                "key_path" : "path_to_key_tei_private.key"
             },
             "dev": {
-                "cert_path" : "path_to_crt_dev_private.json",
-                "key_path" : "path_to_key_dev_private.json"
+                "cert_path" : "path_to_crt_dev_private.crt",
+                "key_path" : "path_to_key_dev_private.key"
             },
             "aim": {
-                "cert_path" : "path_to_crt_dev_private.json",
-                "key_path" : "path_to_key_dev_private.json"
+                "cert_path" : "path_to_crt_dev_private.crt",
+                "key_path" : "path_to_key_dev_private.key"
             }
-        }
         }
     }
 }
+
