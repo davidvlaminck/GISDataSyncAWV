@@ -1,0 +1,43 @@
+Samenvatting:
+Data ter beschikking stellen van GIS-gebruikers (30 personen) voor gebruik in Qgis en ArcGIS.
+Data kan dienen om analyses uit te voeren,rapporten te maken, fouten te zoeken in de data of om kaarten te maken.
+Data zal ook gebruikt worden als voorbereiding van kleine en grote inventarisatieprojecten. Data zal ook gebruikt worden in GNSS-toestellen.
+
+Data: selectie van Assets, relaties, controlefiches uit Infra Db
+Data wordt geselecteerd op basis van assettype.
+Output: primair GeoJson, secundair Geopackage en Esri File Geodatabase.
+Hierbij kunnen attributen afkomstig uit relaties (of gerelateerde data) toegevoegd worden aan assetdata of wordt er een relatie gelegd in de geëxporteerde data.
+Het eindproduct moet een zo volledig mogelijke dataset zijn.
+
+
+Randvoorwaarden:
+- logging: beschikbaar op google drive
+- zelfstandig uitvoeren buiten de kantooruren
+- dagelijkse update
+- authenticatie OAUTH
+- per geometrietype een ander bestand (arcgis)
+
+Logging:
+per objecttype (assettype, relatie, controlefyche, agents)
+- timestamp
+- start
+- warnings en volledige errors (traceback)
+- einde
+
+UITBREIDINGEN:
+- audittrail: (log van wijzigingen per object)
+
+
+LIJST ASSETTYPES:
+- straatkolken
+- afschermende constructies
+- bomen
+- toplagen
+- geluidswerendeconstructies
+- langsgrachten
+- vluchtopening, deuren
+- vegetatie
+- emonderdelen => wegverlichting, verkeerslichten, cabines, lussen, rss, wsb, zone30, camera
+
+TE DOEN:
+geojson inladen (1 object) in qgis en manipuleren tot gewenste output is bereikt, output beheerders toevoegen (lijst)
