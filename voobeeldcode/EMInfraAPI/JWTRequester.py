@@ -1,5 +1,6 @@
 import datetime
 import json
+import logging
 import sys
 from pathlib import Path
 
@@ -16,37 +17,58 @@ from voobeeldcode.EMInfraAPI.AbstractRequester import AbstractRequester
 
 
 class JWTRequester(AbstractRequester):
-    def __init__(self, private_key_path: Path, client_id: str, first_part_url: str = ''):
+    def __init__(self, private_key_path: Path, client_id: str, first_part_url: str = '', retries: int = 2):
         if 'cryptography' not in sys.modules:
             raise ModuleNotFoundError('needs module cryptography to work')
 
         super().__init__(first_part_url=first_part_url)
         self.private_key_path: Path = private_key_path
         self.client_id: str = client_id
+        self.retries: int = retries
 
         self.oauth_token: str = ''
         self.expires: datetime.datetime = datetime.datetime.now(datetime.UTC) - datetime.timedelta(seconds=1)
         self.requested_at: datetime.datetime = self.expires
 
     def get(self, url: str = '', **kwargs) -> Response:
-        kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().get(url=url, **kwargs)
+        for _ in range(self.retries):
+            try:
+                kwargs = self.modify_kwargs_for_bearer_token(kwargs)
+                return super().get(url=url, **kwargs)
+            except requests.exceptions.RequestException as e:
+                logging.error(f"Error in GET request: {e}")
 
     def post(self, url: str = '', **kwargs) -> Response:
-        kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().post(url=url, **kwargs)
+        for _ in range(self.retries):
+            try:
+                kwargs = self.modify_kwargs_for_bearer_token(kwargs)
+                return super().post(url=url, **kwargs)
+            except requests.exceptions.RequestException as e:
+                logging.error(f"Error in GET request: {e}")
 
     def put(self, url: str = '', **kwargs) -> Response:
-        kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().put(url=url, **kwargs)
+        for _ in range(self.retries):
+            try:
+                kwargs = self.modify_kwargs_for_bearer_token(kwargs)
+                return super().put(url=url, **kwargs)
+            except requests.exceptions.RequestException as e:
+                logging.error(f"Error in GET request: {e}")
 
     def patch(self, url: str = '', **kwargs) -> Response:
-        kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().patch(url=url, **kwargs)
+        for _ in range(self.retries):
+            try:
+                kwargs = self.modify_kwargs_for_bearer_token(kwargs)
+                return super().patch(url=url, **kwargs)
+            except requests.exceptions.RequestException as e:
+                logging.error(f"Error in GET request: {e}")
 
     def delete(self, url: str = '', **kwargs) -> Response:
-        kwargs = self.modify_kwargs_for_bearer_token(kwargs)
-        return super().delete(url=url, **kwargs)
+        for _ in range(self.retries):
+            try:
+                kwargs = self.modify_kwargs_for_bearer_token(kwargs)
+                return super().delete(url=url, **kwargs)
+            except requests.exceptions.RequestException as e:
+                logging.error(f"Error in GET request: {e}")
 
     def get_oauth_token(self) -> str:
         if self.expires > datetime.datetime.now(datetime.UTC):
