@@ -14,7 +14,7 @@ class LS2Client:
 
     def measure_punt_op_weg(self, wegnummer: str, x: float, y: float, crs: int = 31370) -> dict:
         url = f'weg/{wegnummer}/measure?crs={crs}&x={x}&y={y}'
-        response = self.requester.post(url=url)
+        response = self.requester.get(url=url)
         return response.json()
 
     def wegsegment_by_id(self, id: str) -> dict:

@@ -23,6 +23,6 @@ if __name__ == '__main__':
 
     print(ls2_client.wegsegment_by_id(id='674669'))
 
-
+    print(ls2_client.measure_punt_op_weg(wegnummer='N1730002', x=153815, y=208759))
 
 
