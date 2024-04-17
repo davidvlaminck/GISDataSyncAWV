@@ -10,10 +10,12 @@ class AbstractRequester(Session, metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def get(self, url: str = '', **kwargs) -> Response:
+        print(f'url: {self.first_part_url}{url}')
         return super().get(url=self.first_part_url + url, **kwargs)
 
     @abc.abstractmethod
     def post(self, url: str = '', **kwargs) -> Response:
+        print(f'url: {self.first_part_url}{url}')
         return super().post(url=self.first_part_url + url, **kwargs)
 
     @abc.abstractmethod

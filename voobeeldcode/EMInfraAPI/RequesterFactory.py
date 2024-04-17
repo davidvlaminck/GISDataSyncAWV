@@ -15,7 +15,10 @@ class RequesterFactory:
     @classmethod
     def create_requester(cls, settings: dict, auth_type: AuthType, env: Environment) -> AbstractRequester:
         try:
-            specific_settings = settings['authentication'][auth_type.name][env.name.lower()]
+            if auth_type == AuthType.JWT:
+                specific_settings = settings['authentication'][auth_type.name][env.name.lower()]
+            else:
+                specific_settings = settings['authentication'][auth_type.value][env.name.lower()]
         except KeyError as e:
             raise ValueError(f"Could not load the settings for {auth_type} {env}") from e
 
