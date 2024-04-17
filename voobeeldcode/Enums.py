@@ -10,4 +10,5 @@ class Environment(Enum):
 
 class AuthType(Enum):
     JWT = 'JWT',
-    CERT = 'cert'
+    CERT = 'cert',
+    COOKIE = 'cookie'

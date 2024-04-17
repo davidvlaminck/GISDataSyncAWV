@@ -1,5 +1,6 @@
 from voobeeldcode.EMInfraAPI.AbstractRequester import AbstractRequester
 from voobeeldcode.EMInfraAPI.CertRequester import CertRequester
+from voobeeldcode.EMInfraAPI.CookieRequester import CookieRequester
 from voobeeldcode.EMInfraAPI.JWTRequester import JWTRequester
 from voobeeldcode.Enums import Environment, AuthType
 
@@ -13,11 +14,11 @@ class RequesterFactory:
     }
     
     @classmethod
-    def create_requester(cls, settings: dict, auth_type: AuthType, env: Environment) -> AbstractRequester:
+    def create_requester(cls, settings: dict, auth_type: AuthType, env: Environment, **kwargs) -> AbstractRequester:
         try:
             if auth_type == AuthType.JWT:
                 specific_settings = settings['authentication'][auth_type.name][env.name.lower()]
-            else:
+            elif auth_type == AuthType.CERT:
                 specific_settings = settings['authentication'][auth_type.value][env.name.lower()]
         except KeyError as e:
             raise ValueError(f"Could not load the settings for {auth_type} {env}") from e
@@ -35,5 +36,8 @@ class RequesterFactory:
             return CertRequester(cert_path=specific_settings['cert_path'],
                                  key_path=specific_settings['key_path'],
                                  first_part_url=first_part_url)
+        elif auth_type == AuthType.COOKIE:
+            return CookieRequester(cookie=kwargs['cookie'], first_part_url=first_part_url.replace('services.',
+                                                                                                  ''))
         else:
             raise ValueError(f"Invalid authentication type: {auth_type}")
