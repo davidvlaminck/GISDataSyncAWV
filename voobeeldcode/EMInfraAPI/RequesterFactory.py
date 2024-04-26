@@ -14,7 +14,8 @@ class RequesterFactory:
     }
     
     @classmethod
-    def create_requester(cls, settings: dict, auth_type: AuthType, env: Environment, **kwargs) -> AbstractRequester:
+    def create_requester(cls, auth_type: AuthType, env: Environment, settings: dict = None, **kwargs
+                         ) -> AbstractRequester:
         try:
             if auth_type == AuthType.JWT:
                 specific_settings = settings['authentication'][auth_type.name][env.name.lower()]
