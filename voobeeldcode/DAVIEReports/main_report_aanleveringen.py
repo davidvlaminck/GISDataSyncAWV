@@ -12,7 +12,6 @@ filters = {
     #      {"status": "DATA_AANGELEVERD", "substatus": "GOEDGEKEURD"}],
     # "creatieDatumVan": "2024-04-26",
     "verbergElisaAanleveringen": True
-    #   "creatieDatumTot": "2024-04-26",
 }
 
 if __name__ == '__main__':
@@ -27,23 +26,23 @@ if __name__ == '__main__':
     taken_client = TakenClient(requester=requester_taken)
     taken_dict = {taak['identificatieLabel']: taak for taak in taken_client.get_niet_afgesloten()}
 
-    with open('taken_rapport.csv', 'w', newline='') as csvfile:
-        headers = ['creatieTijdstip', 'machtigingen', 'omschrijving', 'metadata', 'linken', 'locaties',
-                   'aangemaaktDoorVoId', 'typeKey', 'eigenaarToepassing', 'aangemaaktDoorNaam', 'uitvoerenVoorDeadline',
-                   'deadline', 'toegekendAanVoId', 'typeLabel', 'status', 'dringend', 'identificatieLabel',
-                   'toegekendAanNaam', 'id', 'statuswijzigingen']
-        writer = csv.DictWriter(csvfile, delimiter='\t', quoting=csv.QUOTE_MINIMAL, fieldnames=headers)
-        writer.writeheader()
-
-        for taak_dict in taken_dict.values():
-            writer.writerow(taak_dict)
+    # with open('taken_rapport.csv', 'w', newline='') as csvfile:
+    #     headers = ['creatieTijdstip', 'machtigingen', 'omschrijving', 'metadata', 'linken', 'locaties',
+    #                'aangemaaktDoorVoId', 'typeKey', 'eigenaarToepassing', 'aangemaaktDoorNaam', 'uitvoerenVoorDeadline',
+    #                'deadline', 'toegekendAanVoId', 'typeLabel', 'status', 'dringend', 'identificatieLabel',
+    #                'toegekendAanNaam', 'id', 'statuswijzigingen']
+    #     writer = csv.DictWriter(csvfile, delimiter='\t', quoting=csv.QUOTE_MINIMAL, fieldnames=headers)
+    #     writer.writeheader()
+    #
+    #     for taak_dict in taken_dict.values():
+    #         writer.writerow(taak_dict)
 
     with open('aanleveringen_rapport.csv', 'w', newline='') as csvfile:
-        headers = ['aanleveringnummer', 'type', 'status', 'substatus', 'aanmaakDatum', 'vervalOfEinddatum',
-                   'aanvrager', 'referentie', 'ondernemingsnummer', 'onderneming', 'id', 'omschrijving', 'isStudie',
-                   'dossierNummer', 'besteknummer', 'dienstbevelnummer', 'opmaakDatum', 'aangebodenDatum',
-                   'goedgekeurdDatum', 'afgekeurdDatum', 'geannuleerdDatum', 'vervallenDatum',
-                   'verificatieDringend', 'verificatieToegekendAan', 'verificatieStatus']
+        headers = ['aanleveringnummer', 'type', 'status', 'substatus', 'aanmaakDatum', 'aanvrager', 'referentie',
+                   'onderneming', 'id', 'dossierNummer', 'besteknummer', 'dienstbevelnummer', 'opmaakDatum',
+                   'aangebodenDatum', 'goedgekeurdDatum', 'verificatieDringend', 'verificatieToegekendAan',
+                   'verificatieStatus', 'isStudie', 'ondernemingsnummer', 'vervalOfEinddatum', 'afgekeurdDatum',
+                   'geannuleerdDatum', 'vervallenDatum', 'omschrijving']
         writer = csv.DictWriter(csvfile, delimiter='\t', quoting=csv.QUOTE_MINIMAL, fieldnames=headers)
         writer.writeheader()
 
@@ -57,25 +56,28 @@ if __name__ == '__main__':
             aanlevering_historiek = davie_client.historiek_by_aanlevering_id(id=aanlevering_dict['id'])
             aanlevering_dict['opmaakDatum'] = next(
                 (x['tijdstip'] for x in aanlevering_historiek if x['status'] == 'IN_OPMAAK'), None)
-            aanlevering_dict['aangebodenDatum'] = next((x['tijdstip'] for x in aanlevering_historiek if
-                                                        x['status'] == 'DATA_AANGELEVERD' and x[
-                                                            'substatus'] == 'AANGEBODEN'), None)
-            aanlevering_dict['goedgekeurdDatum'] = next((x['tijdstip'] for x in aanlevering_historiek if
-                                                         x['status'] == 'DATA_AANGELEVERD' and x[
-                                                             'substatus'] == 'GOEDGEKEURD'), None)
-            aanlevering_dict['afgekeurdDatum'] = next((x['tijdstip'] for x in aanlevering_historiek if
-                                                       x['status'] == 'DATA_AANGELEVERD' and x[
-                                                           'substatus'] == 'AFGEKEURD'), None)
+            aanlevering_dict['aangebodenDatum'] = next(
+                (x['tijdstip'] for x in aanlevering_historiek
+                 if x['status'] == 'DATA_AANGELEVERD' and x['substatus'] == 'AANGEBODEN'), None)
+            aanlevering_dict['goedgekeurdDatum'] = next(
+                (x['tijdstip'] for x in aanlevering_historiek
+                 if x['status'] == 'DATA_AANGELEVERD' and x['substatus'] == 'GOEDGEKEURD'), None)
+            aanlevering_dict['afgekeurdDatum'] = next(
+                (x['tijdstip'] for x in aanlevering_historiek
+                 if x['status'] == 'DATA_AANGELEVERD' and x['substatus'] == 'AFGEKEURD'), None)
             aanlevering_dict['geannuleerdDatum'] = next(
                 (x['tijdstip'] for x in aanlevering_historiek if x['status'] == 'GEANNULEERD'), None)
             aanlevering_dict['vervallenDatum'] = next(
                 (x['tijdstip'] for x in aanlevering_historiek if x['status'] == 'VERVALLEN'), None)
 
+            # aanpassingen arthur
+            del aanlevering_dict['id']
+            del aanlevering_dict['opmaakDatum']
+
             taak_details = taken_dict.get(aanlevering_dict['aanleveringnummer'])
             if taak_details is not None:
                 aanlevering_dict['verificatieToegekendAan'] = taak_details['toegekendAanNaam']
                 aanlevering_dict['verificatieStatus'] = taak_details['status']
-                aanlevering_dict['verificatieDringend'] = taak_details['dringend']
 
             writer.writerow(aanlevering_dict)
             #
