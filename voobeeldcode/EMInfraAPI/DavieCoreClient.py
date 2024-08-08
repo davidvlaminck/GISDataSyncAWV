@@ -23,14 +23,12 @@ class DavieCoreClient:
             response = self.requester.post(url=url, json=filter_dict)
 
             result_dict = response.json()
-            results.extend(result_dict['data'])
+            yield from result_dict['data']
 
             if result_dict['links'].get('next') is None:
                 break
 
             _from += size
-
-        return results
 
     def historiek_by_aanlevering_id(self, id) -> [dict]:
         url = f'aanleveringen/{id}/historiek'
