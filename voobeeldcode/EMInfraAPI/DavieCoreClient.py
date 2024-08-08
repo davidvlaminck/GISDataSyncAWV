@@ -17,10 +17,11 @@ class DavieCoreClient:
         if filter_dict.get('sortBy') is None:
             filter_dict['sortBy'] = {"property": "creatieDatum", "order": "desc"}
 
-        results = []
         while True:
             url = f'aanleveringen/zoek?from={_from}&size={size}'
             response = self.requester.post(url=url, json=filter_dict)
+
+            print(f'fetched up to {size} results from {url}')
 
             result_dict = response.json()
             yield from result_dict['data']
@@ -34,7 +35,3 @@ class DavieCoreClient:
         url = f'aanleveringen/{id}/historiek'
         response = self.requester.get(url=url)
         return response.json()
-
-
-
-
