@@ -1,7 +1,7 @@
-import datetime
 import json
 import logging
 import sys
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 import jwt  # pip install pyjwt and cryptography
@@ -27,8 +27,8 @@ class JWTRequester(AbstractRequester):
         self.retries: int = retries
 
         self.oauth_token: str = ''
-        self.expires: datetime.datetime = datetime.datetime.now(datetime.UTC) - datetime.timedelta(seconds=1)
-        self.requested_at: datetime.datetime = self.expires
+        self.expires: datetime = datetime.now(timezone.utc) - timedelta(seconds=1)
+        self.requested_at: datetime = self.expires
 
     def get(self, url: str = '', **kwargs) -> Response:
         for _ in range(self.retries):
@@ -71,12 +71,12 @@ class JWTRequester(AbstractRequester):
                 logging.error(f"Error in GET request: {e}")
 
     def get_oauth_token(self) -> str:
-        if self.expires > datetime.datetime.now(datetime.UTC):
+        if self.expires > datetime.now(timezone.utc):
             return self.oauth_token
 
         authentication_token = self.generate_authentication_token()
         self.oauth_token, expires_in = self.get_access_token(authentication_token)
-        self.expires = self.requested_at + datetime.timedelta(seconds=expires_in) - datetime.timedelta(minutes=1)
+        self.expires = self.requested_at + timedelta(seconds=expires_in) - timedelta(minutes=1)
 
         return self.oauth_token
 
@@ -104,12 +104,12 @@ class JWTRequester(AbstractRequester):
         return kwargs
 
     def generate_authentication_token(self) -> str:
-        self.requested_at = datetime.datetime.now(datetime.UTC)
+        self.requested_at = datetime.now(timezone.utc)
         # Authentication token generation
         payload = {'iss': self.client_id,
                    'sub': self.client_id,
                    'aud': 'https://authenticatie.vlaanderen.be/op',
-                   'exp': self.requested_at + datetime.timedelta(minutes=9),
+                   'exp': self.requested_at + timedelta(minutes=9),
                    'jti': ''.join(choice(string.ascii_lowercase) for _ in range(20))
                    }
 
